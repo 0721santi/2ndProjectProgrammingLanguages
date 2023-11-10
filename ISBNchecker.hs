@@ -5,8 +5,11 @@ verifySpacing isbn
 
 removeSpaces isbn spaced
   | spaced == 1 = filter (/= ' ') isbn
-  | spaced == 0 = filter (/= '-') isbn
+  | spaced == 2 = filter (/= '-') isbn
   | otherwise = isbn
+  
+
+generaISBN isbn = removeSpaces isbn (verifySpacing isbn)
 
 -- checkLastDigit isbn
 --     if(last isbn == 'X')
