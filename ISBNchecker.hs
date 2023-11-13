@@ -26,9 +26,7 @@ addToINTarr isbn newISBN =
         then fromSTRtoINT (last isbn) newISBN
     else addToINTarr (init isbn) (fromSTRtoINT (last isbn) newISBN)
 
-generaISBN isbn = addToINTarr (removeSpaces isbn (verifySpacing isbn))
-
--- appliesWeight isbn = map (\(val, index) -> val * index) (zip isbn [10,9..1])
+generaISBN isbn = addToINTarr (removeSpaces isbn (verifySpacing isbn)) []
 
 --curriedAppliesWeight: zipWith multiplica todos los elementos de ISBN con el respectivo valor en el array
 --[10,9..1] y los guarda en un array de tuplas.
@@ -37,4 +35,4 @@ curriedAppliesWeight isbn = zipWith (*) isbn [10,9..1]
 verifyISBN isbn =
     mod (sum (curriedAppliesWeight isbn)) 11 == 0
 
-isbnChecker isbn = verifyISBN . generaISBN isbn
+isbnChecker isbn = verifyISBN (generaISBN isbn)
